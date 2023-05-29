@@ -20,15 +20,13 @@ if ($titulo === false) {
     exit();
 }
 
-$sql = 'UPDATE videos SET url = :url, title = :title WHERE id = :id;';
-$statement = $pdo->prepare($sql);
-$statement->bindValue(':url', $url);
-$statement->bindValue(':title', $titulo);
-$statement->bindValue(':id', $id, PDO::PARAM_INT);
+$video = new \Alura\Mvc\Entity\Video($url,$titulo);
+$video->setId($id);
 
-$result = $statement->execute();
+$repository = new \Alura\Mvc\Repository\VideoRepository($pdo);
+$result = $repository->update($video);
 
-if ( $result === false)
+if ($result === false)
     header('Location: /?sucesso=0');
 else
     header('Location: /?sucesso=1');
