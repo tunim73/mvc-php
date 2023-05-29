@@ -9,14 +9,14 @@ Coloca em url = o valor do campo url que vem do body da rquisição, com a funç
 filter_input já existe uma validação, o terceiro parâmetro verifica que tipo de validação.
 */
 if ($url === false) {
-    header('Location: /index.php?sucesso=0');
+    header('Location: /?sucesso=0');
     exit();
 }
 
 $titulo = filter_input(INPUT_POST, 'titulo');
 
 if ($titulo === false) {
-    header('Location: /index.php?sucesso=0');
+    header('Location: /?sucesso=0');
     exit();
 }
 
@@ -27,8 +27,8 @@ $statement->bindValue(1, $url);
 $statement->bindValue(2, $titulo);
 
 if ($statement->execute() === false) {
-    header('Location: /index.php?sucesso=0');
+    header('Location: /?sucesso=0');
 } else {
-    header('Location: /index.php?sucesso=1');
+    header('Location: /?sucesso=1');
 }
 
